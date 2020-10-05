@@ -27,82 +27,117 @@ class vi:
         self.x *= cte
         self.dx *= cte
         
+# 
+# COMO USAR:
+# Inicializacao de um novo dado:
+# variavel = vi( dado , incerteza )
+# Ex: 
+# volume = vi( 0.03 , 0.01 )
+#
+#
+#                        ------------- IMPORTANTE!! -------------------
+#  quando realizar uma operacao, a atribuicao sera feita na variavel antes do ponto
+#  por exemplo: v1.soma(v2) 
+#  isso eh equivalente a ter feito isso: v1 += v2
+#  porem o programa ja faz isso tanto pra parte dos dados, quanto pra parte da incerteza.
+#  NAO EH NECESSARIO USAR VARIAVEIS TEMPORARIAS (a menos em casos especificos).  
+#
+#
+#
+#                        -------------  FUNCOES -------------------
+#
+#  Soma {
+#   Necessario: 2 variaveis
+#   v1 = vi(0.1 , 0.2)
+#   v2 = vi(0.2 , 0.3)
+# 
+#   Somar v1 + v2:
+#   v1.soma(v2)
+#
+#   Somar v2 + v1:
+#   v2.soma(v1)
+# }
+# 
+# ------------------------------------------------------------------------------------------
+#
+# Subtracao {
+#   Necessario: 2 variaveis
+#   v1 e v2.
+#  
+#  subtrair v1 - v2:
+#  v1.sub(v2)
+#   
+#   Subtrair v2 - v1:
+#   v2.sub(v1)
+# }
+# 
+# ------------------------------------------------------------------------------------------
+#
+# Produto {
+#   Necessario: 2 variaveis
+#   v1 e v2
+# 
+#   Produto v1*v2:
+#   v1.produto(v2)    
+#   ou
+#   v2.produto(v1)
+# 
+# }
+# 
+# ------------------------------------------------------------------------------------------
+#
+# Potencia {
+#   Necessario: 1 variavel (v1)
+# 
+#   v1.potencia(2)
+#   eh equivalente a v1**2
+#   
+#   v1.potencia(x) | x -> valor da potencia.
+# 
+# }
+# 
+# ------------------------------------------------------------------------------------------
+#
+# Produtoporconstante {
+#   Necessario: 1 variavel (v1)
+# 
+#   v1.produtoporconstante(x)
+#   multiplica o dado e a incerteza por x
+# 
+# }
+# 
+# ------------------------------------------------------------------------------------------
+#
+# Divisao {
+#   Necessario: 2 variaveis (v1,v2)
+#   
+#   Divisao v1/v2:
+#       v1.divisao(v2)
+# 
+#   Divisao v2/v1:
+#       v2.divisao(v1)
+# }
+# 
+# ------------------------------------------------------------------------------------------
+#
+# Exemplo:
+#
+# F = m.a
+#
+# P = F/Area
+#
+# m = vi(x,dx)
+# a = vi(y,dy)
+#
+# F = m
+# F.produto(a)
+# F.divisao(Area)
+#
+# print(F.x) -> valor da pressao
+# print(F.dx) -> incerteza da pressao
+# 
+# ------------------------------------------------------------------------------------------
+#
 
+#comeca a codar aqui:
 
-# p = vi(3.13 , 0.01)
-# p.potencia(2)
-
-# print(p.x)
-# print(p.dx)
-
-
-# t1 = vi(3.13 , 0.01)
-# t2 = vi(3.14 , 0.01)
-# t3 = vi(3.12 , 0.01)
-
-# raioe = vi(0.006 , 0.0001)
-# massa = vi(1.51575 , 0.0003)
-# g = 9.81
-# h_2 = vi(0.934 , 0.002)
-
-# raioe.potencia(2)
-# raioe.produto(massa)
-
-
-# t1.potencia(2)
-# t1.produtoporconstante(g)
-# t1.divisao(h_2)
-# t1.x -= 1
-# t1.produto(raioe)
-# print('t1 |' + str(t1.x) + '  +  ' + str(t1.dx) )
-
-
-# t2.potencia(2)
-# t2.produtoporconstante(g)
-# t2.divisao(h_2)
-# t2.x -= 1
-# t2.produto(raioe)
-# print('t2 |' + str(t2.x) + '  +  ' + str(t2.dx) )
-
-# t3.potencia(2)
-# t3.produtoporconstante(g)
-# t3.divisao(h_2)
-# t3.x -= 1
-# t3.produto(raioe)
-# print('t3 |' + str(t3.x) + '  +  ' + str(t3.dx) )
-
-I = 0.0001
-
-raioe = vi(0.006 , I)
-massae = vi(0.12125 , I)
-
-
-raio1df = vi(0.006 , I)
-raio2df = vi(0.0625 , I)
-massadf = vi(0.4707 , I)
-
-raio1co = vi(0.0625 , I)
-raio2co = vi(0.076 , I)
-massaco = vi(0.9238 , I)
-
-def eixoo(raioe, massae):
-    raioe.potencia(2)
-    raioe.produto(massae)
-    raioe.produtoporconstante(0.5)
-
-def cilindro(r1 , r2 , m):
-    r1.potencia(2)
-    r2.potencia(2)
-    r1.soma(r2)
-    r1.produto(m)
-    r1.produtoporconstante(0.5)
-
-eixoo(raioe, massae)
-cilindro(raio1df, raio2df, massadf)
-cilindro(raio1co, raio2co, massaco)
-
-
-raioe.soma(raio1df)
-raioe.soma(raio1co)
-
-print(str(raioe.x) + "  +  " + str(raioe.dx))
