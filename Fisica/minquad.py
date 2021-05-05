@@ -100,7 +100,13 @@ print("Coeficiente Angular: " + str(cangular) + " +- " + str(d_cangular) )
 print("Coeficiente Linear: " + str(clinear) + " +- " + str(d_b) )
 
 #plotando o grafico de X vs Y
-plt.plot(x_values , y_values)
+plt.scatter(x_values , y_values, c="red", s=10)
+y_final = []
+for x in x_values:
+    y_final.append((x*cangular) + clinear)
+
+plt.plot(x_values, y_final)
+
 plt.xlabel("x")
 plt.ylabel("y")
 plt.title("y = " + str(cangular) + "x + " + str(clinear) )
